@@ -1,7 +1,6 @@
 require "pp"
 
-archive_count = 3
-dirs = %w(/ /archive1/ /archive2/ /archive3/ /archivex/)
+dirs = %w(/ /archive1/ /archive2/ /archive3/ /archive4/ /archive5/ /archive6/ /archive7/ /archive8/ /archive9/ /archivex/)
 files = []
 dirs.each do |dir|
   s = `./dropbox_uploader.sh list #{dir}`
@@ -10,11 +9,13 @@ dirs.each do |dir|
 end
 files = files.sort_by{|d,f,t| t||'0000' }.reverse
 
+files_per_dir = 20
 dirs.each_with_index do |dir,i|
   puts "DIR #{dir}"
-  n = 3
+  n = files_per_dir
   n = files.size if i==dirs.size-1
-  files[i*3,n].each do |d,f,t|
+  _files = files[i*files_per_dir,n] || []
+  _files.each do |d,f,t|
     if d!=dir
       puts "  move %10s -> %10s %s" % [d,dir,f]
       puts `./dropbox_uploader.sh move #{d}#{f} #{dir}#{f}`
