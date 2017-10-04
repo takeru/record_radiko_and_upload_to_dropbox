@@ -8,6 +8,6 @@ fi
 
 cd `dirname $0`
 filename=$3_`date '+%Y_%m%d_%H%M'`.mp3
-./record_radiko.sh $1 $2 $filename && ./dropbox_uploader.sh upload $filename && rm $filename
+./record_radiko.sh $1 $2 $filename && ./dropbox_uploader.sh upload $filename / && rm $filename
 
 ruby maintenance_for_3files_per_directory.rb
