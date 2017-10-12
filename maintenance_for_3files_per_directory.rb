@@ -5,7 +5,7 @@ files = []
 dirs.each do |dir|
   s = `./dropbox_uploader.sh list #{dir}`
   #  [F] BAKA_2014_0603_0100.mp3
-  files += s.split("\n").map{|s| s[/\[F\] (\d+) (.+.mp3)/,2] }.compact.map{|s| [dir,s,s[/(\d\d\d\d_\d\d\d\d_\d\d\d\d)\.mp3/,1]] }
+  files += s.split("\n").map{|s| s[/\[F\]\s+(\d+)\s+(.+.mp3)/,2] }.compact.map{|s| [dir,s,s[/(\d\d\d\d_\d\d\d\d_\d\d\d\d)\.mp3/,1]] }
 end
 files = files.sort_by{|d,f,t| t||'0000' }.reverse
 
